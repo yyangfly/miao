@@ -1,0 +1,33 @@
+<p>Drag the bar to change its width:</p>
+<div style="background: orange; width: 60px; height: 20px"></div>
+
+<script>
+  let lastX; // Tracks the last observed mouse X position
+  let lastY; // Tracks the last observed mouse Y position
+  let bar = document.querySelector("div");
+  bar.addEventListener("mousedown", event => {
+    if (event.button == 0) {
+      lastX = event.clientX;
+      lastY = event.clientY;
+      window.addEventListener("mousemove", moved);
+      event.preventDefault(); // Prevent selection
+    }
+  });
+
+  function moved(event) {
+    if (event.buttons == 0) {
+      window.removeEventListener("mousemove", moved);
+    } else {
+      let distX = event.clientX - lastX;
+      let distY = event.clientY - lastY;
+      let newWidth = Math.max(10, bar.offsetWidth + distX);
+      let newHeight = Math.max(10, bar.offsetHeight + distY);
+      bar.style.width = newWidth + "px";
+      bar.style.height = newHeight + "px";
+      lastX = event.clientX;
+      lastY = event.clientY;
+    }
+  }
+
+  
+</script>

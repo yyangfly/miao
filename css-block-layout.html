@@ -1,138 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* * {
-            background-color: rgba(0, 0, 0, 0.08);
-            box-shadow: inset 0 0 1px red;
-        } */
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		/* * {
+			background-color: rgba(0, 0, 0, 0.08);
+			box-shadow: inset 0 0 1px red;
+		} */
 
-        body, html {
-            margin: 0;
-        }
+		body,
+		html {
+			margin: 0;
+		}
 
-        header {
-            background-color: black;
-        }
+		header {
+			background-color: black;
+		}
 
-        header div {
-            width: 600px;
-            margin: auto;
-            color: white;
-        }
+		header div {
+			width: 600px;
+			margin: auto;
+			color: white;
+		}
 
-        p {
-            width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+		p {
+			width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
 
-        div.blocks {
-            width: 600px;
-            margin: auto;
-            font-size: 0;
-        }
+		div.blocks {
+			width: 600px;
+			margin: auto;
+			font-size: 0;
+		}
 
-        div.blocks span {
-            font-size: 16px;
-            display: inline-block;
-            width: 180px;
-            height: 40px;
-            border: 3px solid;
-            box-sizing: border-box;
-            margin-right: 30px;
-            margin-bottom: 15px;
-            background-color: pink;
-        }
+		div.blocks span {
+			font-size: 16px;
+			display: inline-block;
+			width: 180px;
+			height: 40px;
+			border: 3px solid;
+			box-sizing: border-box;
+			margin-right: 30px;
+			margin-bottom: 15px;
+			background-color: pink;
+		}
 
-        div.blocks span:hover {
-            background-color: red;
-        }
+		div.blocks span:hover {
+			background-color: red;
+		}
 
-        div.blocks span:nth-child(3n) {
-            margin-right: 0;
-        }
+		div.blocks span:nth-child(3n) {
+			margin-right: 0;
+		}
 
-        ul {
-            width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0;
-            overflow: hidden;
-            list-style: none;
-        }
+		ul {
+			width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 0;
+			overflow: hidden;
+			list-style: none;
+		}
 
-        ul li {
-            border-bottom: 1px dotted;
-            margin-bottom: -1px;
-        }
+		ul li {
+			border-bottom: 1px dotted;
+			margin-bottom: -1px;
+		}
 
-        footer {
-            text-align: center;
-            background-color: rgb(238, 138, 238);
-        }
+		footer {
+			text-align: center;
+			background-color: rgb(238, 138, 238);
+		}
 
-        #a, #b, #c, #d {
-            height: 40px;
-            width: 180px;
-            background-color: pink;
-            border: 3px solid;
-            box-sizing: border-box;
-        }
+		#a,
+		#b,
+		#c,
+		#d {
+			height: 40px;
+			width: 180px;
+			background-color: pink;
+			border: 3px solid;
+			box-sizing: border-box;
+		}
 
-        #a {
-            position: relative;
-            left: 200px;
-        }
+		#a {
+			position: relative;
+			left: 200px;
+		}
 
-        #b {
-            position: absolute;
-            top: 20px;
-            left: 10px;
-        }
+		#b {
+			position: absolute;
+			top: 20px;
+			left: 10px;
+		}
 
-        #c {
-            position: absolute;
-            top: 20px;
-            left: 10px;
-        }
+		#c {
+			position: absolute;
+			top: 20px;
+			left: 10px;
+		}
 
-        #d {
-            position: absolute;
-            top: 20px;
-            left: 300px;
-        }
+		#d {
+			position: absolute;
+			top: 20px;
+			left: 300px;
+		}
 
-        #a:hover, #b:hover, #c:hover, #d:hover {
-            background-color: red;
-        }
-
-    </style>
+		#a:hover,
+		#b:hover,
+		#c:hover,
+		#d:hover {
+			background-color: red;
+		}
+	</style>
 </head>
+
 <body>
-    <header>
-        <div>hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果</div>
-    </header>
-    <p>页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px</p>
-    <div class="blocks">
-        <span>Lorem.</span><span>Suscipit?</span><span>Molestiae.</span><span>Iste.</span><span>Iure.</span><span>Voluptas!</span><span>Facilis!</span><span>Modi.</span><span>Voluptas.</span><span>Nostrum?</span><span>Placeat?</span><span>Debitis.</span>
-    </div>
-    <ul>
-        <li>link</li>
-        <li>link</li>
-        <li>link</li>
-        <li>link</li>
-        <li>link</li>
-    </ul>
-    <footer><p>©版权所有</p><p>本页所有布局均使用块元素</p></footer>
-    <div id="a">
-        <div id="b">
-            <div id="c"></div>
-            <div id="d"></div>
-        </div>
-    </div>
+	<header>
+		<div>hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world
+			请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果</div>
+	</header>
+	<p>页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体
+		宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+		页面主体 宽度600px</p>
+	<div class="blocks">
+		<span>Lorem.</span><span>Suscipit?</span><span>Molestiae.</span><span>Iste.</span><span>Iure.</span><span>Voluptas!</span><span>Facilis!</span><span>Modi.</span><span>Voluptas.</span><span>Nostrum?</span><span>Placeat?</span><span>Debitis.</span>
+	</div>
+	<ul>
+		<li>link</li>
+		<li>link</li>
+		<li>link</li>
+		<li>link</li>
+		<li>link</li>
+	</ul>
+	<footer>
+		<p>©版权所有</p>
+		<p>本页所有布局均使用块元素</p>
+	</footer>
+	<div id="a">
+		<div id="b">
+			<div id="c"></div>
+			<div id="d"></div>
+		</div>
+	</div>
 </body>
+
 </html>

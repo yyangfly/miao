@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>demo</title>
+  <style>
+    div,
+    span {
+      background-color: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 1px red;
+    }
+
+    div {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      left: 40vw;
+      top: 40vh;
+      background: rgba(0, 0, 0, .05);
+    }
+
+    span {
+      position: absolute;
+      transform:
+        rotate(calc((var(--index) - 2) * 30deg)) translate(80px) rotate(calc((var(--index) - 2) * -30deg));
+    }
+
+    span:nth-child(1) {
+      --index: 0;
+    }
+
+    span:nth-child(2) {
+      --index: 1;
+    }
+
+    span:nth-child(3) {
+      --index: 2;
+    }
+
+    span:nth-child(4) {
+      --index: 3;
+    }
+
+    span:nth-child(5) {
+      --index: 4;
+    }
+
+    span:nth-child(6) {
+      --index: 5;
+    }
+
+    span:nth-child(7) {
+      --index: 6;
+    }
+
+    span:nth-child(8) {
+      --index: 7;
+    }
+
+    span:nth-child(9) {
+      --index: 8;
+    }
+
+    span:nth-child(10) {
+      --index: 9;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>
+    <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hight Light Code</title>
+</head>
+
+<body>
+  <strong>Test</strong>
+
+  <pre data-language="javascript"><code>
+    const x = 10;
+    function hello() {
+      console.log("Hello");
+    }
+
+    var x = 100;
+    function plus-x(val) {
+      return val + x;
+    }
+  </code></pre>
+
+  <pre data-language="javascript"><code>
+    var x = 100;
+    function greet(name) {
+      console.log("hello, " + name);
+    }
+  </code></pre>
+
+  <pre data-language="java"><code>
+    import java.util.Scanner;
+
+    public class Test {
+      public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        for (char c : input.toCharArray()) {
+          System.out.println(c + "|");
+        }
+        sc.close();
+      }
+    }
+
+  </code></pre>
+
+  <pre data-language="python">
+    def hello():
+      print("hello")
+  </pre>
+
+  <span>
+    test it is test it istest it istest it istest it istest it is
+    test it istest it istest it istest it istest it istest it istest it is
+    test it istest it istest it istest it istest it is
+  </span>
+</body>
+
+</html>
+
+<script>
+  function highlightCode(node, keywords) {
+    var text = node.textContent;
+    node.textContent = "";
+
+    var match, pos = 0;
+    while (match = keywords.exec(text)) {
+      var before = text.slice(pos, match.index);
+      node.appendChild(document.createTextNode(before));
+      var strong = document.createElement("strong");
+      strong.appendChild(document.createTextNode(match[0]));
+      node.appendChild(strong);
+      pos = keywords.lastIndex;
+    }
+    var after = text.slice(pos);
+    node.appendChild(document.createTextNode(after));
+  }
+
+  var languages = {
+    javascript: /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|if|import|in|instanceof|let|new|return|super|switch|this|throw|try|typeof|var|void|while|with|yield|await|enum|implements|interface|package|private|protected|public|static)\b/g,
+    java: /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while|var|record|sealed|permits|non-sealed)\b/g,
+    python: /\b(False|None|True|and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield|match|case)\b/g,
+    c: /\b(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|inline|int|long|register|restrict|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|_Alignas|_Alignof|_Atomic|_Bool|_Complex|_Generic|_Imaginary|_Noreturn|_Static_assert|_Thread_local)\b/g,
+    rust: /\b(as|async|await|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while|yield|try|union)\b/g
+  };
+
+  function hightlightAllCode() {
+    var pres = document.body.getElementsByTagName("pre");
+    for (var i = 0; i < pres.length; i++) {
+      var pre = pres[i];
+      var lang = pre.getAttribute("data-language");
+      if (languages.hasOwnProperty(lang))
+        highlightCode(pre, languages[lang]);
+    }
+  }
+
+  hightlightAllCode();
+</script>

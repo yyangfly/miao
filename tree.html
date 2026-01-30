@@ -1,0 +1,27 @@
+<script>
+    function viewTree(root) {
+        var html = htmlTree(root); 
+        treeView.innerHTML = html;
+    }
+    function htmlTree(root) {
+        if (root) {
+            return `<div>
+                    <header style="text-align: center;">${root.val}</header>
+                    <div style="display: flex;">
+                        <aside style="width:0;flex-grow:1;">${htmlTree(root.left)}</aside>
+                        <aside style="width:0;flex-grow:1;">${htmlTree(root.right)}</aside>
+                    </div>
+                    </div>`;
+        } else {
+            return '';
+        }
+    }
+</script>
+
+<div id="treeView"></div>
+
+<!-- <header style="text-align: center;"></header>
+<div style="display: flex;">
+    <aside></aside>
+    <aside></aside>
+</div> -->

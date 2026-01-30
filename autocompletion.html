@@ -1,0 +1,72 @@
+<input type="text" id="field">
+<div id="suggestions" style="cursor: pointer"></div>
+
+<script>
+  // Builds up an array with global variable names, like
+  // 'alert', 'document', and 'scrollTo'
+  // var terms = [];
+  // for (var name in window)
+  //   terms.push(name);
+
+  // Your code here.
+
+  const input = document.querySelector("#field");
+  const suggest = document.querySelector("#suggestions");
+
+  let displayTime = 0; // 表示正在显示的内容的输入时间
+
+  field.addEventListener("input", (e) => {
+    let text = input.value.trim();
+
+    let inputTime = Date.now();
+
+    getSuggestion(text, suggestions => {
+      if (inputTime > displayTime) {
+        displayTime = inputTime;
+        suggest.textContent = '';
+
+        for (let s of suggestions) {
+          let sDiv = document.createElement("div");
+          sDiv.textContent = s;
+          suggest.append(sDiv);
+        }
+      }
+    });
+  });
+
+  var s;
+  function suggested(data) {
+    if ('g' in data) {
+      s = data.g.map(it => it.q);
+    } else {
+      s = [];
+    }
+  }
+
+  function getSuggestion(text, f) {
+    let url = `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&imod=2&sugsid=60273,63143,66689,66937,67049,67082,67116,67129,67154,67226,67237,67295,67312,67318,67317,67314,67323,67321,67417,67444,67472,67460,67509,67501,67568,67556,67545,67601,67618,67621,67626,67612,67641,67644,67649,67654&wd=${ text }&his=%5B%7B%22time%22%3A1769669761%2C%22kw%22%3A%22hashmap%22%7D%5D&req=2&usegosug=1&csor=3&pwd=he&cb=suggested&_=1769779237287`;
+
+    const script = document.createElement("script");
+    script.src = url;
+    script.onload = () => {
+      f(s);
+    };
+
+    document.body.append(script);
+
+    // const res = [];
+
+    // if (text === "")
+    //   return res;
+
+    // for (var i = 0; i < 10; i++) {
+    //   res.push(text + i);
+    // }
+
+    // setTimeout(() => {
+    //   f(res);
+    // }, 50 + Math.random() * 200);
+
+    // return res;
+  }
+</script>
