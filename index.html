@@ -1,52 +1,148 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>仓库文件列表</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont;
-      padding: 32px;
-    }
-    ul {
-      line-height: 1.8;
-    }
-    .error {
-      color: red;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>仓库文件浏览</title>
+
+<style>
+body{
+  font-family: system-ui,-apple-system,BlinkMacSystemFont;
+  padding:40px;
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+#path{
+  color:#666;
+  margin-bottom:20px;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+}
+
+li{
+  margin:6px 0;
+}
+
+a{
+  text-decoration:none;
+  color:#0366d6;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+.error{
+  color:red;
+}
+</style>
+
 </head>
+
 <body>
-  <h1>File list.</h1>
-  <ul id="file-list"></ul>
-  <p id="error" class="error"></p>
 
-  <script>
-    const owner = "yyangfly";
-    const repo = "miao";
+<h1>Repository files</h1>
+<div id="path"></div>
 
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/`)
-      .then(res => res.json())
-      .then(data => {
-        if (!Array.isArray(data)) {
-          throw new Error(data.message || "GitHub API 返回异常");
+<ul id="file-list"></ul>
+
+<p id="error" class="error"></p>
+
+<script>
+
+const owner = "yyangfly";
+const repo = "miao";
+
+const ul = document.getElementById("file-list");
+const error = document.getElementById("error");
+const pathBox = document.getElementById("path");
+
+function loadDir(path=""){
+
+  ul.innerHTML="";
+  error.textContent="";
+
+  pathBox.textContent = "/" + path;
+
+  fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`)
+  .then(res=>res.json())
+  .then(data=>{
+
+    if(!Array.isArray(data)){
+      throw new Error(data.message);
+    }
+
+    // 返回上级目录
+    if(path!==""){
+
+      const parent = path.split("/").slice(0,-1).join("/");
+
+      const li=document.createElement("li");
+      const a=document.createElement("a");
+
+      a.textContent="⬅ 返回上级目录";
+      a.href="#";
+
+      a.onclick=()=>{
+        loadDir(parent);
+      };
+
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+
+    data.forEach(file=>{
+
+      const li=document.createElement("li");
+      const a=document.createElement("a");
+
+      if(file.type==="dir"){
+
+        a.textContent="📁 "+file.name;
+        a.href="#";
+
+        a.onclick=()=>{
+          loadDir(file.path);
+        };
+
+      }else{
+
+        a.textContent="📄 "+file.name;
+
+        if(file.name.endsWith(".html")){
+
+          a.href=`https://${owner}.github.io/${repo}/${file.path}`;
+
+        }else{
+
+          a.href=file.download_url;
+
         }
 
-        const ul = document.getElementById("file-list");
-        data.forEach(file => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.textContent = file.name;
-          a.href = "./" + file.path;
-          li.appendChild(a);
-          ul.appendChild(li);
-        });
-      })
-      .catch(err => {
-        document.getElementById("error").textContent =
-          "加载失败（可能触发了 GitHub API 匿名限流，请稍后再试）";
-        console.error(err);
-      });
-  </script>
+        a.target="_blank";
+      }
+
+      li.appendChild(a);
+      ul.appendChild(li);
+
+    });
+
+  })
+  .catch(err=>{
+    error.textContent="加载失败（可能触发 GitHub API 限流）";
+    console.error(err);
+  });
+
+}
+
+loadDir();
+
+</script>
+
 </body>
 </html>
