@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  if error
+    p.notice.error= error
+
+  article.card
+    h1= post.title
+    p.meta 作者：#{post.authorName} | 发布时间：#{post.createdAt.toLocaleString()}
+    p.content= post.content
+
+  section.card
+    h2 评论
+
+    if currentUser
+      form(action='/posts/' + post.id + '/comments', method='post')
+        p
+          label(for='content') 评论内容
+          textarea#content(name='content', rows='4', required=true)
+        p
+          button(type='submit') 发表评论
+    else
+      p 请先
+        a(href='/login') 登录
+        |  后评论。
+
+    if post.comments.length
+      ul.comment-list
+        each comment in post.comments
+          li.comment-item
+            p.meta #{comment.authorName} · #{comment.createdAt.toLocaleString()}
+            p= comment.content
+    else
+      p 还没有评论，欢迎第一个发言。

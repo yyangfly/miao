@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1 论坛首页
+
+  if error
+    p.notice.error= error
+  if success
+    p.notice.success= success
+
+  if currentUser
+    section.card
+      h2 发新帖
+      form(action='/posts', method='post')
+        p
+          label(for='title') 标题
+          input#title(type='text', name='title', required=true)
+        p
+          label(for='content') 内容
+          textarea#content(name='content', rows='5', required=true)
+        p
+          button(type='submit') 发布帖子
+  else
+    p 请先
+      a(href='/login') 登录
+      | 后发帖。
+
+  section.card
+    h2 所有帖子
+    if posts.length
+      ul.post-list
+        each post in posts
+          li.post-item
+            h3
+              a(href='/posts/' + post.id)= post.title
+            p.meta 作者：#{post.authorName} | 发布时间：#{post.createdAt.toLocaleString()}
+            p= post.content
+    else
+      p 还没有帖子，快来发布第一条。

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 注册
+
+  if error
+    p.notice.error= error
+
+  section.card
+    form(action='/register', method='post')
+      p
+        label(for='username') 用户名
+        input#username(type='text', name='username', required=true)
+      p
+        label(for='password') 密码
+        input#password(type='password', name='password', required=true)
+      p
+        button(type='submit') 注册并登录
+  p
+    | 已有账号？
+    a(href='/login') 去登录
