@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header>
+    <h1>todos</h1>
+    <div class="input-container">
+      <input id="todo-input" type="text">
+    </div>
+  </header>
+  <main>
+    <ul class="todo-list">
+
+    </ul>
+  </main>
+  <footer>
+    <span class="todo-count"></span>
+    <button class="clear-completed">Clear completed</button>
+  </footer>
+
+  <script>
+
+    let todoCount = 0;
+
+    function updateTodoCount() {
+      const todoCountSpan = document.querySelector('.todo-count');
+      if (todoCount === 0) {
+        todoCountSpan.textContent = '';
+      } else {
+        todoCountSpan.textContent = `${todoCount} items left!`;
+      }
+    }
+
+    const todoInput = document.getElementById('todo-input');
+    todoInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && todoInput.value.length > 1) {
+        let text = todoInput.value;
+        todoInput.value = '';
+        addTodo(text);
+      }
+    });
+
+    const todoList = document.querySelector('.todo-list');
+
+    function addTodo(text) {
+      todoList.insertAdjacentHTML('beforeend', `
+    <li>
+      <input type="checkbox">
+      <label>${text}</label>
+      <button class="destroy">delete</button>
+    </li>
+  `);
+      todoCount += 1;
+      updateTodoCount();
+    }
+
+    todoList.addEventListener('click', (e) => {
+      if (e.target.classList.contains('destroy')) {
+        let li = e.target.closest('li');
+        let inputCheckbox = li.querySelector('input');
+        if (!inputCheckbox.checked) {
+          todoCount -= 1;
+          updateTodoCount();
+        }
+        li.remove();
+      }
+    });
+
+    todoList.addEventListener('change', (e) => {
+      if (e.target.type === 'checkbox') {
+        const label = e.target.nextElementSibling;
+        if (e.target.checked) {
+          label.style.textDecoration = 'line-through';
+          todoCount -= 1;
+          updateTodoCount();
+        } else {
+          label.style.textDecoration = 'none';
+          todoCount += 1;
+          updateTodoCount();
+        }
+      }
+    });
+
+    document.querySelector('.clear-completed').addEventListener('click', () => {
+      document.querySelectorAll('.todo-list li').forEach(li => {
+        if (li.querySelector('input[type="checkbox"]').checked) {
+          li.remove();
+        }
+      });
+    });
+
+  </script>
+</body>
+
+</html>
